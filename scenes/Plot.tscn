@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://domubk60yb4o7"]
+
+[ext_resource type="Script" path="res://script/Plot.cs" id="1_7125r"]
+[ext_resource type="Texture2D" uid="uid://b41868x5befev" path="res://images/Farm/TX Tileset Grass.png" id="2_nkpas"]
+
+[node name="Plot" type="Node2D"]
+script = ExtResource("1_7125r")
+labelRadius = 45.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("2_nkpas")
+hframes = 16
+vframes = 16
+frame = 133
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(16, 16)
+text = "01"
+horizontal_alignment = 1
+vertical_alignment = 1

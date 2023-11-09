@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnjs46vu2venq"]
+
+[ext_resource type="Script" path="res://script/Manager.cs" id="1_fpawn"]
+[ext_resource type="PackedScene" uid="uid://rqtlh4oguo85" path="res://scenes/Productor.tscn" id="2_120ci"]
+[ext_resource type="PackedScene" uid="uid://domubk60yb4o7" path="res://scenes/Plot.tscn" id="2_c2dax"]
+
+[node name="Manager" type="Node"]
+script = ExtResource("1_fpawn")
+PlotScene = ExtResource("2_c2dax")
+
+[node name="Productor" parent="." instance=ExtResource("2_120ci")]

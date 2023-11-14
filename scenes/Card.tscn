@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbiv6u7xbuntf"]
+
+[ext_resource type="Script" path="res://script/CardInfo.cs" id="1_1j0i0"]
+[ext_resource type="Texture2D" uid="uid://cnokm6vwqgn5f" path="res://images/card-characters.png" id="1_1pmh6"]
+
+[node name="Card" type="Node2D"]
+z_index = 5
+script = ExtResource("1_1j0i0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(4, 4)
+texture = ExtResource("1_1pmh6")
+hframes = 4
+vframes = 4
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = -64.0
+offset_top = 64.0
+offset_right = -24.0
+offset_bottom = 104.0
+scale = Vector2(3.25436, 1.01827)
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 0.307281
+offset_top = 2.94618
+offset_right = 89.3073
+offset_bottom = 28.9462
+scale = Vector2(0.444411, 1.4)
+horizontal_alignment = 1
+vertical_alignment = 1

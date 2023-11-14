@@ -5,6 +5,7 @@ public partial class Plot : Node2D
 {
 	[Export]
 	public float labelRadius;
+	private Sprite2D sprite;
 	public void displaceLabel(float angle){
 		Label aux = GetChild<Label>(1);
 
@@ -21,12 +22,15 @@ public partial class Plot : Node2D
 	public Vector2 getDirToMe(Vector2 player){
 		return player.DirectionTo(Position);
 	}
+	public void setGrow(){
+		sprite.FrameCoords = new Vector2I(5,9);
+	}
+	public void setUnGrow(){
+		sprite.FrameCoords = new Vector2I(5,8);
+	}
 	public override void _Ready()
 	{
+		sprite = GetChild<Sprite2D>(0);
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
 }

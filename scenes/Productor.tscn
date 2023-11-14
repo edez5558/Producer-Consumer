@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://rqtlh4oguo85"]
+[gd_scene load_steps=16 format=3 uid="uid://rqtlh4oguo85"]
 
 [ext_resource type="Script" path="res://script/Productor.cs" id="1_0x7kg"]
 [ext_resource type="Texture2D" uid="uid://buwmfnstuwsvi" path="res://images/sprite/free_farm_character_walk_frame32x32.png" id="1_jxjic"]
 
 [sub_resource type="Animation" id="Animation_o32bj"]
+resource_name = "RESET"
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -18,9 +19,8 @@ tracks/0/keys = {
 "values": [Vector2i(1, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_8vkbx"]
-resource_name = "Shovel_Bottom"
-length = 0.8
+[sub_resource type="Animation" id="Animation_xcf7b"]
+resource_name = "Sleeping"
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -29,64 +29,19 @@ tracks/0/path = NodePath(".:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2i(0, 4), Vector2i(1, 4), Vector2i(2, 4), Vector2i(1, 4)]
+"values": [Vector2i(3, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_8tclc"]
-resource_name = "Shovel_Left"
-length = 0.8
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [Vector2i(0, 5), Vector2i(1, 5), Vector2i(2, 5), Vector2i(1, 5)]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ew4m6"]
+_data = {
+"RESET": SubResource("Animation_o32bj"),
+"Sleeping": SubResource("Animation_xcf7b")
 }
 
-[sub_resource type="Animation" id="Animation_txdag"]
-resource_name = "Shovel_Right"
-length = 0.8
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [Vector2i(0, 6), Vector2i(1, 6), Vector2i(2, 6), Vector2i(1, 6)]
-}
-
-[sub_resource type="Animation" id="Animation_d4d4c"]
-resource_name = "Shovel_Up"
-length = 0.8
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [Vector2i(0, 7), Vector2i(1, 7), Vector2i(2, 7), Vector2i(1, 7)]
-}
-
-[sub_resource type="Animation" id="Animation_lwo7j"]
+[sub_resource type="Animation" id="Animation_jdqlg"]
 resource_name = "Walk_Bottom"
 length = 0.8
 loop_mode = 1
@@ -103,7 +58,7 @@ tracks/0/keys = {
 "values": [0, 1, 2, 1]
 }
 
-[sub_resource type="Animation" id="Animation_t853h"]
+[sub_resource type="Animation" id="Animation_aumq8"]
 resource_name = "Walk_Left"
 length = 0.8
 loop_mode = 1
@@ -120,7 +75,7 @@ tracks/0/keys = {
 "values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_m36cp"]
+[sub_resource type="Animation" id="Animation_ubtev"]
 resource_name = "Walk_Right"
 length = 0.8
 loop_mode = 1
@@ -137,7 +92,7 @@ tracks/0/keys = {
 "values": [Vector2i(0, 2), Vector2i(1, 2), Vector2i(2, 2), Vector2i(1, 2)]
 }
 
-[sub_resource type="Animation" id="Animation_fxci7"]
+[sub_resource type="Animation" id="Animation_la3n3"]
 resource_name = "Walk_Up"
 length = 0.8
 loop_mode = 1
@@ -154,17 +109,88 @@ tracks/0/keys = {
 "values": [Vector2i(0, 3), Vector2i(1, 3), Vector2i(2, 3), Vector2i(1, 3)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ew4m6"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t3e8h"]
 _data = {
-"RESET": SubResource("Animation_o32bj"),
-"Shovel_Bottom": SubResource("Animation_8vkbx"),
-"Shovel_Left": SubResource("Animation_8tclc"),
-"Shovel_Right": SubResource("Animation_txdag"),
-"Shovel_Up": SubResource("Animation_d4d4c"),
-"Walk_Bottom": SubResource("Animation_lwo7j"),
-"Walk_Left": SubResource("Animation_t853h"),
-"Walk_Right": SubResource("Animation_m36cp"),
-"Walk_Up": SubResource("Animation_fxci7")
+"Bottom": SubResource("Animation_jdqlg"),
+"Left": SubResource("Animation_aumq8"),
+"Right": SubResource("Animation_ubtev"),
+"Up": SubResource("Animation_la3n3")
+}
+
+[sub_resource type="Animation" id="Animation_al4as"]
+resource_name = "Shovel_Bottom"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 4), Vector2i(1, 4), Vector2i(2, 4), Vector2i(1, 4)]
+}
+
+[sub_resource type="Animation" id="Animation_mpbol"]
+resource_name = "Shovel_Left"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 5), Vector2i(1, 5), Vector2i(2, 5), Vector2i(1, 5)]
+}
+
+[sub_resource type="Animation" id="Animation_kc67q"]
+resource_name = "Shovel_Right"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 6), Vector2i(1, 6), Vector2i(2, 6), Vector2i(1, 6)]
+}
+
+[sub_resource type="Animation" id="Animation_8qquw"]
+resource_name = "Shovel_Up"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 7), Vector2i(1, 7), Vector2i(2, 7), Vector2i(1, 7)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1vv77"]
+_data = {
+"Bottom": SubResource("Animation_al4as"),
+"Left": SubResource("Animation_mpbol"),
+"Right": SubResource("Animation_kc67q"),
+"Up": SubResource("Animation_8qquw")
 }
 
 [node name="Productor" type="Node2D"]
@@ -181,5 +207,7 @@ frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
-"": SubResource("AnimationLibrary_ew4m6")
+"": SubResource("AnimationLibrary_ew4m6"),
+"Walking": SubResource("AnimationLibrary_t3e8h"),
+"Working": SubResource("AnimationLibrary_1vv77")
 }

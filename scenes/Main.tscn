@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://vm5sbsks0luf"]
+[gd_scene load_steps=5 format=3 uid="uid://vm5sbsks0luf"]
 
 [ext_resource type="PackedScene" uid="uid://bnjs46vu2venq" path="res://scenes/Manager.tscn" id="1_1b1kj"]
 [ext_resource type="PackedScene" uid="uid://c384swm7y3ieb" path="res://scenes/tile_map.tscn" id="2_7qn7j"]
+[ext_resource type="PackedScene" uid="uid://bbiv6u7xbuntf" path="res://scenes/Card.tscn" id="2_yqhgx"]
+[ext_resource type="AudioStream" uid="uid://q07iy8vedo00" path="res://audio/french-life-172196.mp3" id="4_1n0vf"]
 
 [node name="Main" type="Node2D"]
 
@@ -9,6 +11,13 @@
 radiusP = 200.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="CardFarmer" parent="." instance=ExtResource("2_yqhgx")]
+position = Vector2(-471, -232)
+
+[node name="CardCow" parent="." instance=ExtResource("2_yqhgx")]
+position = Vector2(468, -232)
+index = 1
 
 [node name="TileMap" parent="." instance=ExtResource("2_7qn7j")]
 z_index = -1
@@ -28,5 +37,10 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Empezar"
 icon_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_1n0vf")
+volume_db = -14.97
+autoplay = true
 
 [connection signal="pressed" from="Button" to="Manager" method="_on_button_pressed"]

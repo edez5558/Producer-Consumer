@@ -1,15 +1,14 @@
 using Godot;
 using System;
-using System.Diagnostics.Tracing;
 
-public partial class Productor : Node2D, IWorkable
+public partial class Consumidor : Node2D, IWorkable
 {
+    [Signal]
+	public delegate void ConsumidorTryActionEventHandler(Consumidor trabajador);
 	[Signal]
-	public delegate void ProductorTryActionEventHandler(Productor trabajador);
+	public delegate void ConsumidorNextWorkEventHandler(Consumidor trabajador);
 	[Signal]
-	public delegate void ProductorNextWorkEventHandler(Productor trabajador);
-	[Signal]
-	public delegate void ProductorChangeStateEventHandler(State state);
+	public delegate void ConsumidorChangeStateEventHandler(State state);
 	
 	private Timer timer;
 	private Timer timerWork;
@@ -18,21 +17,20 @@ public partial class Productor : Node2D, IWorkable
 	public int nextIndex { get; set; }
 	public Plot currentPlot { get; set; }
 	public Vector2 moveTo { get; set; }
+
 	[Export]
 	public float distanceFromPlot = 30.0f;
 	public float distanceToRest {get; set;}
 	public bool isMoving {get; set; }
 
     public int amountAdd {get; set;}
-
 	public string name {get; set;}
-	private State state;
-
 	private String lastDirection;
+	private State state;
 	public void setState(State state){
         this.state = state;
 
-		EmitSignal(SignalName.ProductorChangeState,(int)this.state);
+		EmitSignal(SignalName.ConsumidorChangeState,(int)this.state);
 	}
     public int leftWork { get; set; }
 
@@ -41,7 +39,7 @@ public partial class Productor : Node2D, IWorkable
 
 		leftWork = random.RandiRange(3,10);
 		GD.Print("Productor trabajara: "+ leftWork);
-		EmitSignal(SignalName.ProductorTryAction,this);
+		EmitSignal(SignalName.ConsumidorTryAction,this);
 
 		GD.Print("Productor Awake");
 	}
@@ -54,8 +52,9 @@ public partial class Productor : Node2D, IWorkable
 	}
 	public override async void _Ready()
 	{
-		name = "Productor";
-		amountAdd = 1;
+		name = "Consumidor";
+        amountAdd = -1;
+
 		distanceToRest = distanceFromPlot;
 		timer = new Timer();
 		timerWork = new Timer();
@@ -73,8 +72,8 @@ public partial class Productor : Node2D, IWorkable
 	}
 	public void endWork(){
 		timerWork.Stop();
-		currentPlot.setGrow();
-		EmitSignal(SignalName.ProductorNextWork,this);
+		currentPlot.setUnGrow();
+		EmitSignal(SignalName.ConsumidorNextWork,this);
 	}
 	private string getDirectionMove(){
 		if(moveTo.X - Position.X > 0){
@@ -115,7 +114,7 @@ public partial class Productor : Node2D, IWorkable
 
     public bool canWork(int amount)
     {
-		return amount < 35;
+		return amount > 0;
     }
 
 }
